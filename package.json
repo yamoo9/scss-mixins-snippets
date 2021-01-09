@@ -4,7 +4,7 @@
   "description": "@euid/scss-mixins 라이브러리 스니펫",
   "version": "0.0.1",
   "publisher": "yamoo9",
-  "icon": "https://raw.githubusercontent.com/yamoo9/scss-mixins-snippets/master/assets/icon.png",
+  "icon": "assets/icon.png",
   "engines": {
     "vscode": "^1.52.0"
   },
@@ -38,7 +38,7 @@
     ]
   },
   "keywords": [
-    "@euid",
+    "euid",
     "scss",
     "sass",
     "mixins",
