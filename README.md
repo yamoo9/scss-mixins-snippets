@@ -1,3 +1,5 @@
+<img src="./assets/icon.png" alt="" width="60" />
+
 # @euid/scss-mixins 스니펫(Snippets)
 
 [이듬(E.UID)](https://euid.dev)의 블렌디드 러닝 학습용 [@euid/scss-mixins](https://www.npmjs.com/package/@euid/scss-mixins) 라이브러리 활용을 위한 스니펫.
