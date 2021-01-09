@@ -1,0 +1,923 @@
+{
+
+  // ———————————————————————————————————————————————————————————————————————————————————————————————————————————
+  // SCSS 기본
+  // ———————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+  "모듈 가져오기": {
+    "prefix": "import",
+    "body": [
+      "@import \"${1:module}\";"
+    ],
+    "description": "스타일 모듈을 가져옵니다."
+  },
+  "믹스인 불러오기(include)": {
+    "prefix": "include",
+    "body": [
+      "@include ${1:믹스인 이름}($0)"
+    ],
+    "description": "정의된 SCSS 믹스인을 불러와 코드를 출력합니다."
+  },
+  "@content 믹스인 불러오기(include)": {
+    "prefix": "include-content",
+    "body": [
+      "@include ${1:믹스인 이름}($2) {",
+      "  $0",
+      "}"
+    ],
+    "description": "정의된 SCSS 믹스인을 불러와 포함하는 콘텐츠를 전달해 코드를 출력합니다."
+  },
+  "믹스인 만들기": {
+    "prefix": "mixin",
+    "body": [
+      "@mixin ${1:믹스인 이름}($2) {",
+      "  $0",
+      "}"
+    ],
+    "description": "새로운 SCSS 믹스인을 만듭니다."
+  },
+
+  // ————————————————————————————————————————————————————————————————————————————————————————————————————————————
+  // 라이브러리 모듈
+  // ————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+  "@euid/scss-mixins 모듈 가져오기": {
+    "prefix": "euid",
+    "body": [
+      "@import \"@euid/scss-mixins\";",
+      "",
+      "$0"
+    ],
+    "description": "@euid/scss-mixins 모듈 가져오기 구문을 출력합니다."
+  },
+
+  // ————————————————————————————————————————————————————————————————————————————————————————————————————————————
+  // 유틸리티 함수
+  // ————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+  // 단위 --------------------------------------------------------------------------------------------------------
+
+  "[px → rem 변경] ▷ rem(10px) | rem(10) | rem(12, 18)": {
+    "prefix": "rem",
+    "body": [
+      "rem(${1:\\$px:number}${2:, \\$base?:number})"
+    ],
+    "description": "px 단위를 가진 값을 rem 단위 값으로 계산 변경하는 데 사용합니다."
+  },
+  "[px → em 변경] ▷ em(11px) | em(11) | em(10, 20)": {
+    "prefix": "em",
+    "body": [
+      "em(${1:\\$px:number}${2:, \\$base?:number})"
+    ],
+    "description": "px 단위를 가진 값을 em 단위 값으로 계산 변경하는 데 사용합니다."
+  },
+  "[단위 없는 값 → px 값 변경] ▷ unitless-px(21)": {
+    "prefix": "unitless-px",
+    "body": [
+      "unitless-px(${1:\\$value:number})"
+    ],
+    "description": "단위가 없는 숫자 값을 px 단위 값으로 변경하여 반환할 때 사용합니다. (0 제외)"
+  },
+  "[단위 제거] ▷ remove-unit(32px) | remove-unit(11.54%)": {
+    "prefix": "remove-unit",
+    "body": [
+      "remove-unit(${1:\\$value:number})"
+    ],
+    "description": "rem(), em() 함수 내부에서 사용되는 유틸리티 함수로 단위를 제거하는 데 사용합니다."
+  },
+  "[숫자, 문자 값 중 택 1 반환] ▷ get-number-or-string($num-or-str)": {
+    "prefix": "get-number-or-string",
+    "body": [
+      "get-number-or-string(${1:\\$value:[number, string]})"
+    ],
+    "description": "전달 받은 값을 분석한 후, 숫자 또는 문자 값을 반환 받아야 할 경우 사용합니다. (0을 제외한 숫자 값은 px 값 반환)"
+  },
+
+  // 컬러 --------------------------------------------------------------------------------------------------------
+
+  "[등록된 색 구성표의 값 반환] ▷ get-color(white) | get-color(state-focus)": {
+    "prefix": "get-color",
+    "body": [
+      "get-color(${1:\\$name:string})"
+    ],
+    "description": "컬러 이름을 전달해 매칭되는 컬러 값을 추출할 수 있어 일관된 컬러 시스템을 구축, 활용하는데 유용하게 사용 할 수 있습니다."
+  },
+  "[#헥스코드 → 색 구성표에 등록된 색 이름 반환] ▷ get-color-name(#101010)": {
+    "prefix": "get-color-name",
+    "body": [
+      "get-color-name(${1:\\$value:color})"
+    ],
+    "description": "등록된 컬러 이름이 생각나지 않을 경우 디자인 시안에서 복사한 16진수 값을 전달해 컬러 이름 값을 확인할 때 사용합니다."
+  },
+  "[색 구성표에 등록된 이름인지 확인] ▷ has-color(deco)": {
+    "prefix": "has-color",
+    "body": [
+      "has-color(${1:\\$name:string})"
+    ],
+    "description": "색 구성표에 등록된 컬러 이름이 포함되어 있는 지 확인 후 결과를 반환합니다."
+  },
+  "[대체 컬러 (등록된 색 이름이 없을 경우 대체)] ▷ alt-color(white, #fff)": {
+    "prefix": "alt-color",
+    "body": [
+      "alt-color(${1:\\$name:string}, ${2:\\$alt-color:string})"
+    ],
+    "description": "색 구성표에 등록된 컬러 이름을 우선 사용하되, 이름이 없을 경우 기본 값을 사용하도록 설정할 때 사용합니다."
+  },
+  "[접근성 준수 전경색 자동 제안] ▷ a11y-color(#fef, #301) | a11y-color(#eceded, #767271, AAA, 20, true)": {
+    "prefix": "a11y-color",
+    "body": [
+      "a11y-color(${1:\\$fg:color}, ${2:\\$bg:color}${3:, \\$level?:string, \\$size?:number, \\$bold?:bool})"
+    ],
+    "description": "WCAG 2.1 명도 대비 기준에 맞춰 AA(4.5:1) 또는 AAA(7:1) 레벨에 맞는 전경색을 자동으로 찾아 제안합니다."
+  },
+  "[light 또는 dark 모드 판별] ▷ light-or-dark(#98ed12)": {
+    "prefix": "light-or-dark",
+    "body": [
+      "light-or-dark(${1:\\$color:color})"
+    ],
+    "description": "전달 받은 색의 명도 대비 값을 확인하여 \"밝은 색\"인지 \"어두운 색\"인지 분별하여 값을 반환해야할 때 사용합니다."
+  },
+  "[명도대비 비율 반환] ▷ color-contrast(#ed9012, #29120d)": {
+    "prefix": "color-contrast",
+    "body": [
+      "color-contrast(${1:\\$fg:color}, ${2:\\$bg:color})"
+    ],
+    "description": "전달 받은 전경, 배경색의 명도 대비 차를 확인하여 값을 반환 받아야 할 때 사용합니다."
+  },
+  "[가장 읽기 쉬운 전경색 반환] ▷ most-legible-color(#0102e8)": {
+    "prefix": "most-legible-color",
+    "body": [
+      "most-legible-color(${1:\\$color:color})"
+    ],
+    "description": "특정 배경 색상 위에 검정 또는 하얀색 텍스트를 사용하고 싶을 경우 확인하여 값을 반환 받아야 할 때 사용합니다."
+  },
+
+  // 문자 --------------------------------------------------------------------------------------------------------
+  
+  "[텍스트 대체] ▷ str-replace('일부 사람들', '일부', '대부분')": {
+    "prefix": "str-replace",
+    "body": [
+      "str-replace(${1:\\$string:string}, ${2:\\$search:string}${3:, \\$replace?:string})"
+    ],
+    "description": "특정 문자의 내용 중 일부 문자를 검색해 다른 문자로 대체하고자 할 경우 사용합니다."
+  },
+  "[텍스트 → 리스트 변환] ▷ str-split(\"h1, p, a\", ', ')": {
+    "prefix": "str-split",
+    "body": [
+      "str-split(${1:\\$string:string}${2:, \\$seperator?:string})"
+    ],
+    "description": "문자 안에 포함된 특정 분리 기호(예 콤마(,))를 찾아 각 아이템으로 구성된 리스트를 반환 받아야 할 때 사용합니다."
+  },
+  "[문자 → 숫자 변환] ▷ str-to-num('24') | str-to-num('184', 200)": {
+    "prefix": "str-to-num",
+    "body": [
+      "str-to-num(${1:\\$str-number:string}${2:, \\$max-number?:number})"
+    ],
+    "description": "문자 값을 숫자 값으로 변경해야 할 때 사용합니다. (기본 최댓값 100)"
+  },
+  "[문자 반복 출력] ▷ str-repeat(7, '행복하자')": {
+    "prefix": "str-repeat",
+    "body": [
+      "str-repeat(${1:\\$count:number}, ${2:\\$text:string})"
+    ],
+    "description": "문자를 특정 횟수만큼 반복해서 출력할 때 사용합니다."
+  },
+  "[문자 분석 → (count, keyword) 맵] ▷ str-extract-count-keyword('main x3')": {
+    "prefix": "str-extract-count-keyword",
+    "body": [
+      "str-extract-count-keyword(${1:\\$text:string → 'main x3'})"
+    ],
+    "description": "키워드와 카운트 횟수를 포함하는 문자를 분석해 카운트, 키워드를 맵으로 반환 받아야 할 경우 사용합니다."
+  },
+  
+  // 리스트 -----------------------------------------------------------------------------------------------------
+  
+  "[리스트의 첫번째 아이템 추출] ▷ first((a, b, c)) → a": {
+    "prefix": "first",
+    "body": [
+      "first(${1:\\$list:list})"
+    ],
+    "description": "리스트(list) 아이템 중 첫번째 아이템을 손쉽게 추출하고자 할 때 사용합니다."
+  },
+  "[리스트의 마지막 아이템 추출] ▷ last((a, b, c)) → c": {
+    "prefix": "last",
+    "body": [
+      "last(${1:\\$list:list})"
+    ],
+    "description": "리스트(list) 아이템 중 마지막 아이템을 손쉽게 추출하고자 할 때 사용합니다."
+  },
+  "[리스트 복제] ▷ copy-list((a, b, c)) → (a, b, c)": {
+    "prefix": "copy-list",
+    "body": [
+      "copy-list(${1:\\$list:list})"
+    ],
+    "description": "리스트(list)를 복제하고자 할 때 사용합니다."
+  },
+  "[리스트 병합] ▷ merge-list(0 false, 1) → 1 false": {
+    "prefix": "merge-list",
+    "body": [
+      "merge-list(${1:\\$list1:list}, ${2:\\$list2:list})"
+    ],
+    "description": "리스트(list)를 병합할 때 사용합니다. (중복되는 순서의 아이템 덮어쓰기)"
+  },
+  "[키:값 리스트의 키 다음 값 추출] ▷ get-value-after-key(top 20 left 15, top) → 20": {
+    "prefix": "get-value-after-key",
+    "body": [
+      "get-value-after-key(${1:\\$list:list}, ${2:\\$key:string})"
+    ],
+    "description": "키1 값1 키2 값2 ... 형식의 리스트(list)에서 키 뒤에 나오는 값을 추출해야 할 경우 사용합니다."
+  },
+  "[키:값 리스트의 키 다음 값 추출 (매칭 키워드 확인)] ▷ get-match-value-of-keys(b 10 t 25, top t) → 25": {
+    "prefix": "get-match-value-of-keys",
+    "body": [
+      "get-match-value-of-keys(${1:\\$values:list}, ${2:\\$keys:list})"
+    ],
+    "description": "전달 받은 키:값 리스트에서 키 값을 여러가지 값으로 받아 일치할 경우 최종 계산된 값을 반환하고자 할 때 사용합니다."
+  },
+  
+  // 검사 --------------------------------------------------------------------------------------------------------
+  
+  "[자료형 검사] ▷ is-valid-types(4, string bool) → false": {
+    "prefix": "is-valid-types",
+    "body": [
+      "is-valid-types(${1:\\$data:any}, ${2:\\$typelist:list})"
+    ],
+    "description": "커스텀 유틸리티 함수 작성 시, 특정 값의 자료형이 기대되는 자료형과 일치하는 지 확인할 때 사용합니다."
+  },
+  "[키워드 검사] ▷ is-valid-keywords(auto, unset auto) → true": {
+    "prefix": "is-valid-keywords",
+    "body": [
+      "is-valid-keywords(${1:\\$data:any}, ${2:\\$keywordlist:list})"
+    ],
+    "description": "커스텀 유틸리티 함수 작성 시, 특정 값이 여러 키워드 중 하나와 일치하는 지 확인해야 할 때 사용합니다."
+  },
+  "[리스트 간 아이템 포함 검사] ▷ is-include-items(auto none, initial none unset) → true": {
+    "prefix": "is-include-items",
+    "body": [
+      "is-include-items(${1:\\$list:list, \\$comparelist:list})"
+    ],
+    "description": "리스트(A)가 포함하는 아이템이 다른 리스트(B)에도 포함되는 지 여부를 판단 할 때 사용합니다."
+  },
+  
+  // 이징 --------------------------------------------------------------------------------------------------------
+  
+  "[이징 함수 반환] ▷ ease(inout-quint) | ease(out-expo)": {
+    "prefix": "ease",
+    "body": [
+      "ease(${1:\\$keyword:string → [in|out|inout]-[sine|quad|cubic|quart|quint|expo|circ|back]})"
+    ],
+    "description": "등록된 이징 키워드의 물리 움직임을 표현하는 이징 함수를 반환합니다."
+  },
+  "[커스텀 이징 함수 1개 추가 등록] ▷ ease-add(in-euid, cubic-bezier(0.82,-0.03,0.57,0.77))": {
+    "prefix": "ease-add",
+    "body": [
+      "ease-add(${1:\\$keyword:string}, ${2:\\$easing-function:string})"
+    ],
+    "description": "1개의 커스텀 이징 함수를 추가 등록합니다."
+  },
+  "[커스텀 이징 함수 다수 추가 등록] ▷ ease-merge((in-euid: cubic-bezier(0.82,-0.03,0.57,0.77), out-euid: ... ))": {
+    "prefix": "ease-merge",
+    "body": [
+      "ease-merge(${1:\\$extend-easings:map})"
+    ],
+    "description": "1개 이상 다수의 커스텀 이징 함수를 추가 등록합니다."
+  },
+
+  // ————————————————————————————————————————————————————————————————————————————————————————————————————————————
+  // 믹스인
+  // ————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+  // 폰트 --------------------------------------------------------------------------------------------------------
+
+  "[font 관련 속성 믹스인] ▷ font(size 13 lh 1.5 family Dotum)": {
+    "prefix": "font",
+    "body": [
+      "@include font(${1:\\$args:list → size|family|style|weight|variant|stretch|kerning|lh|size-adjust})"
+    ],
+    "description": "설정 가능한 CSS 폰트(Font) 속성을 빠르고 효율적으로 처리할 때 사용하는 믹스인입니다."
+  },
+  "[웹폰트 등록 믹스인] ▷ font-face('euid', '../fonts/euid')": {
+    "prefix": "font-face",
+    "body": [
+      "@include font-face(${1:\\$font-name:stirng}, ${2:\\$file-name:string}${3:, \\$weight?:string, \\$style?:string, \\$support-legacy?:bool})"
+    ],
+    "description": "웹폰트를 직접 정의하는 @font-face 속성을 빠르고 효율적으로 처리할 때 사용하는 믹스인입니다."
+  },
+  "[글자 크기(font-size) 기준 패딩(padding) 설정 믹스인] ▷ font-size-padding(18, 22 26)": {
+    "prefix": "font-size-padding",
+    "body": [
+      "@include font-size-padding(${1:\\$font-size:number}, ${2:\\$padding:[number, string, list]})"
+    ],
+    "description": "글자 크기(rem 단위)를 기준으로 패딩(em 단위)을 설정해야 할 때, 편리하게 활용하기 위한 믹스인입니다."
+  },
+
+  // 텍스트 -------------------------------------------------------------------------------------------------------
+
+  "[text 관련 속성 믹스인] ▷ text(align center ls em(-1) ws es(-0.5))": {
+    "prefix": "text",
+    "body": [
+      "@include text(${1:\\$args:list → align|transform|ls|ws|lb|wb|ww|ow|ts|white-space|indent|align-last|hyphens})"
+    ],
+    "description": "설정 가능한 CSS 텍스트(Text) 속성을 빠르고 효율적으로 처리할 때 사용하는 믹스인입니다."
+  },
+  "[텍스트 생략 믹스인] ▷ text-ellipsis(400, true)": {
+    "prefix": "text-ellipsis",
+    "body": [
+      "@include text-ellipsis(${1:\\$width?:number}${2:, \\$hover-visible?:bool})"
+    ],
+    "description": "텍스트가 설정된 길이보다 넘칠 정도로 길 경우, 생략할 때 사용하는 믹스인입니다."
+  },
+
+  // 간격 --------------------------------------------------------------------------------------------------------
+
+  "[마진(margin) 믹스인] ▷ margin(10) | margin(t 10 l 10)": {
+    "prefix": "margin(",
+    "body": [
+      "@include margin(${1:\\$args:list → t|r|b|l|x|y})"
+    ],
+    "description": "마진(margin)의 개별 속성을 빠르게 설정할 때 사용하는 믹스인입니다."
+  },
+  "[마진(m) 믹스인] ▷ m(10) | m(t 10 l 10)": {
+    "prefix": "m(",
+    "body": [
+      "@include m(${1:\\$args:list → t|r|b|l|x|y})"
+    ],
+    "description": "margin() 믹스인을 빠르게 설정하기 위한 믹스인입니다."
+  },
+  "[마진 X(mx) 믹스인] ▷ mx(10) | mx(10 0)": {
+    "prefix": "mx(",
+    "body": [
+      "@include mx(${1:\\$args:list → left-value right-value})"
+    ],
+    "description": "margin() 믹스인의 x축(left, right) 값을 빠르게 설정하기 위한 믹스인입니다."
+  },
+  "[마진 Y(my) 믹스인] ▷ my(10) | my(10 0)": {
+    "prefix": "my(",
+    "body": [
+      "@include my(${1:\\$args:list → top-value bottom-value})"
+    ],
+    "description": "margin() 믹스인의 y축(top, bottom) 값을 빠르게 설정하기 위한 믹스인입니다."
+  },
+  "[패딩(padding) 믹스인] ▷ padding(10) | padding(t 10 l 10)": {
+    "prefix": "padding(",
+    "body": [
+      "@include padding(${1:\\$args:list → t|r|b|l|x|y})"
+    ],
+    "description": "패딩(padding)의 개별 속성을 빠르게 설정할 때 사용하는 믹스인입니다."
+  },
+  "[패딩(p) 믹스인] ▷ p(10) | p(t 10 l 10)": {
+    "prefix": "p(",
+    "body": [
+      "@include p(${1:\\$args:list → t|r|b|l|x|y})"
+    ],
+    "description": "padding() 믹스인을 빠르게 사용하기 위한 믹스인입니다."
+  },
+  "[패딩 X(px) 믹스인] ▷ px(10) | px(10 0)": {
+    "prefix": "px(",
+    "body": [
+      "@include px(${1:\\$args:list → left-value right-value})"
+    ],
+    "description": "padding() 믹스인의 x축(left, right) 값을 빠르게 설정하기 위한 믹스인입니다."
+  },
+  "[패딩 Y(py) 믹스인] ▷ py(10) | py(10 0)": {
+    "prefix": "py(",
+    "body": [
+      "@include py(${1:\\$args:list → top-value bottom-value})"
+    ],
+    "description": "padding() 믹스인의 y축(top, bottom) 값을 빠르게 설정하기 위한 믹스인입니다."
+  },
+  "[공간(space) 믹스인] ▷ space(10) | space(10 reverse) | space(10, 10) | space(10 reverse, 10)": {
+    "prefix": "space(",
+    "body": [
+      "@include space(${1:\\$x:[number|list]}${2:, \\$y:[number|list]})"
+    ],
+    "description": "x축 또는 y축 공간(space)을 빠르게 설정할 때 사용하는 믹스인입니다."
+  },
+  "[공간(s) 믹스인] ▷ s(10) | s(10 reverse) | s(10, 10) | s(10 reverse, 10)": {
+    "prefix": "s(",
+    "body": [
+      "@include s(${1:\\$x:[number|list]}${2:, \\$y:[number|list]})"
+    ],
+    "description": "space() 믹스인을 빠르게 설장하기 위한 믹스인입니다."
+  },
+  "[공간 X(sx) 믹스인] ▷ sx(10) | sx(10 reverse)": {
+    "prefix": "sx(",
+    "body": [
+      "@include sx(${1:\\$x:list → value reverse?})"
+    ],
+    "description": "space() 믹스인의 x축 공간을 빠르게 설정하기 위한 믹스인입니다."
+  },
+  "[공간 Y(sy) 믹스인] ▷ sy(10) | sy(10 reverse)": {
+    "prefix": "sy(",
+    "body": [
+      "@include sy(${1:\\$y:list → value reverse?})"
+    ],
+    "description": "space() 믹스인의 y축 공간을 빠르게 설정하기 위한 믹스인입니다."
+  },
+
+  // 디스플레이 -----------------------------------------------------------------------------------------------------
+
+  "[감춤 모드 설정 믹스인] ▷ hide()": {
+    "prefix": "hide",
+    "body": [
+      "@include hide"
+    ],
+    "description": "감춤(hide) 모드를 설정하는 믹스인입니다."
+  },
+  "[표시 모드 설정 믹스인] ▷ show() | show(inline-block) | show(table)": {
+    "prefix": "show",
+    "body": [
+      "@include show(${1:\\$mode:string})"
+    ],
+    "description": "표시(display) 모드를 설정하는 믹스인입니다."
+  },
+  "[아이템 순서 설정 믹스인] ▷ order(2) | order(first) | order(last) | order(none)": {
+    "prefix": "order",
+    "body": [
+      "@include order(${1:\\$value:[string, number] → none|first|last|number})"
+    ],
+    "description": "order 속성을 빠르고 효율적으로 처리할 때 사용하는 믹스인입니다."
+  },
+  
+  // 포지션 --------------------------------------------------------------------------------------------------------
+
+  "[위치(position) 믹스인] ▷ position(absolute, t 10 l 10 z 100)": {
+    "prefix": "position",
+    "body": [
+      "@include position(${1:\\$type:string}, ${2:\\$args:list → t|r|b|l|z})"
+    ],
+    "description": "포지션(position) 레이아웃을 위한 개별 속성을 빠르게 설정할 때 사용하는 믹스인입니다."
+  },
+  "[상대 위치 믹스인] ▷ relative(b 0 l 0 z 10)": {
+    "prefix": "relative",
+    "body": [
+      "@include relative(${1:\\$args:list → t|r|b|l|z})"
+    ],
+    "description": "상대 위치(relative position) 레이아웃을 위한 개별 속성을 빠르게 설정할 때 사용하는 믹스인입니다."
+  },
+  "[절대 위치 믹스인] ▷ absolute(t 0 r 0 l 0)": {
+    "prefix": "absolute",
+    "body": [
+      "@include absolute(${1:\\$args:list → t|r|b|l|z})"
+    ],
+    "description": "절대 위치(absolute position) 레이아웃을 위한 개별 속성을 빠르게 설정할 때 사용하는 믹스인입니다."
+  },
+  "[고정 위치 믹스인] ▷ fixed(t 0 l 0 z 300)": {
+    "prefix": "fixed",
+    "body": [
+      "@include fixed(${1:\\$args:list → t|r|b|l|z})"
+    ],
+    "description": "고정 위치(fixed position) 레이아웃을 위한 개별 속성을 빠르게 설정할 때 사용하는 믹스인입니다."
+  },
+  "[스티키 위치 믹스인] ▷ sticky(t 40)": {
+    "prefix": "sticky",
+    "body": [
+      "@include sticky(${1:\\$args:list → t|r|b|l|z})"
+    ],
+    "description": "스티키 위치(sticky position) 레이아웃을 위한 개별 속성을 빠르게 설정할 때 사용하는 믹스인입니다."
+  },
+  "[위치 초기화 믹스인] ▷ static()": {
+    "prefix": "static",
+    "body": [
+      "@include static"
+    ],
+    "description": "위치(position) 레이아웃 설정을 해제할 때 사용하는 믹스인입니다."
+  },
+
+  // 플렉스박스 -----------------------------------------------------------------------------------------------------
+
+  "[플렉스 컨테이너 믹스인] ▷ flex-container(row wrap justify-center items-center)": {
+    "prefix": "flex-container",
+    "body": [
+      "@include flex-container(${1:\\$args:list → direction|wrap|justify-*|items-*|content-*})"
+    ],
+    "description": "Flex Container 요소에 설정 가능한 속성을 빠르고 효율적으로 처리할 때 사용하는 믹스인입니다."
+  },
+  "[인라인 플렉스 컨테이너 믹스인] ▷ inline-flex-container(row wrap justify-center items-center)": {
+    "prefix": "inline-flex-container",
+    "body": [
+      "@include inline-flex-container(${1:\\$args:list → direction|wrap|justify-*|items-*|content-*})"
+    ],
+    "description": "인라인 Flex Container 요소에 설정 가능한 속성을 빠르고 효율적으로 처리할 때 사용하는 믹스인입니다."
+  },
+  "[플렉스 컨테이너 속성 추가 믹스인] ▷ flex-container-append(column-reverse content-start)": {
+    "prefix": "flex-container-append",
+    "body": [
+      "@include flex-container-append(${1:\\$args:list → direction|wrap|justify-*|items-*|content-*})"
+    ],
+    "description": "Flex Container 요소에 설정 가능한 속성 중 display 를 제외한 나머지 속성을 전달 받은 값을 해석하여 설정합니다."
+  },
+  "[플렉스 아이템 믹스인] ▷ flex-item(g 1 o first)": {
+    "prefix": "flex-item",
+    "body": [ 
+      "@include flex-item(${1:\\$args:list → grow|g|shrink|s|basis|b|auto|initial|none|order|o|self-*})"
+    ],
+    "description": "Flex Item 요소에 설정 가능한 속성을 빠르고 효율적으로 처리할 때 사용하는 믹스인입니다."
+  },
+  "[flex 속성 믹스인] ▷ flex(1) | flex(auto) | flex(initial) | flex(none) | flex(0 0 20%)": {
+    "prefix": "flex",
+    "body": [
+      "@include flex(${1:\\$value:[string, number] → 1|auto|initial|none|flex-value})"
+    ],
+    "description": "flex 속성을 빠르고 효율적으로 처리할 때 사용하는 믹스인입니다."
+  },
+  
+  // CSS 그리드 -----------------------------------------------------------------------------------------------------
+
+  "[CSS 그리드 컨테이너 믹스인] ▷ grid-container(2, 4, 10, justify-items-center items-center, f row)": {
+    "prefix": "grid-container",
+    "body": [
+      "@include grid-container(${1:\\$rows?:number}, ${2:\\$cols?:number}, ${3:\\$gap?:number}, ${4:\\$align?:list}, ${5:\\$auto?:list}, ${6:\\$areas?:list})"
+    ],
+    "description": "Grid Container 요소에 설정 가능한 속성을 빠르고 효율적으로 처리할 때 사용하는 믹스인입니다."
+  },
+  "[인라인 CSS 그리드 컨테이너 믹스인] ▷ inline-grid-container(2, 4, 10, justify-items-center items-center, f row)": {
+    "prefix": "inline-grid-container",
+    "body": [
+      "@include inline-grid-container(${1:\\$rows?:number}, ${2:\\$cols?:number}, ${3:\\$gap?:number}, ${4:\\$align?:list}, ${5:\\$auto?:list}, ${6:\\$areas?:list})"
+    ],
+    "description": "인라인 Grid Container 요소에 설정 가능한 속성을 빠르고 효율적으로 처리할 때 사용하는 믹스인입니다."
+  },
+  "[CSS 그리드 컨테이너 추가 믹스인] ▷ grid-container-append(2, 4, 10, justify-items-center items-center, f row)": {
+    "prefix": "grid-container-append",
+    "body": [
+      "@include grid-container-append(${1:\\$rows?:number}, ${2:\\$cols?:number}, ${3:\\$gap?:number}, ${4:\\$align?:list}, ${5:\\$auto?:list}, ${6:\\$areas?:list})"
+    ],
+    "description": "Grid Container 요소에 설정 가능한 속성 중 display 를 제외한 나머지 속성을 전달 받은 값을 해석하여 설정합니다."
+  },
+  "[CSS 그리드 행(rows) 믹스인] ▷ grid-rows(2) | grid-rows(none) | grid-rows(auto) | grid-rows(1fr repeat(2, 2fr) 1fr)": {
+    "prefix": "grid-rows",
+    "body": [
+      "@include grid-rows(${1:$value:[string, number]})"
+    ],
+    "description": "grid-template-rows 속성을 빠르고 효율적으로 처리할 때 사용하는 믹스인입니다."
+  },
+  "[CSS 그리드 열(cols) 믹스인] ▷ grid-cols(2) | grid-cols(none) | grid-cols(auto) | grid-cols(1fr repeat(2, 2fr) 1fr)": {
+    "prefix": "grid-cols",
+    "body": [
+      "@include grid-cols(${1:$value:[string, number]})"
+    ],
+    "description": "grid-template-columns 속성을 빠르고 효율적으로 처리할 때 사용하는 믹스인입니다."
+  },
+  "[CSS 그리드 자동(auto) 행/열/배치 믹스인] ▷ grid-auto(r min c fr f dense)": {
+    "prefix": "grid-auto",
+    "body": [
+      "@include grid-auto(${1:\\$args:list → rows|r|cols|c|flow|f})"
+    ],
+    "description": "grid-auto-* 속성을 빠르고 효율적으로 처리할 때 사용하는 믹스인입니다."
+  },
+  "[CSS 그리드 자동(auto) 행 믹스인] ▷ auto-rows(auto) | auto-rows(max)": {
+    "prefix": "auto-rows",
+    "body": [
+      "@include auto-rows(${1:\\$value:list → auto|min|max|fr|value)"
+    ],
+    "description": "grid-auto-rows 속성을 빠르고 효율적으로 처리할 때 사용하는 믹스인입니다."
+  },
+  "[CSS 그리드 자동(auto) 열 믹스인] ▷ auto-cols(auto) | auto-cols(fr)": {
+    "prefix": "auto-cols",
+    "body": [
+      "@include auto-cols(${1:\\$value:list → auto|min|max|fr|value})"
+    ],
+    "description": "grid-auto-columns 속성을 빠르고 효율적으로 처리할 때 사용하는 믹스인입니다."
+  },
+  "[CSS 그리드 자동(auto) 배치 믹스인] ▷ auto-flow(row) | auto-flow(dense) | auto-flow(column-dense)": {
+    "prefix": "auto-flow",
+    "body": [
+      "@include auto-flow(${1:\\$value:list → row|column|dense|row-dense|column-dense|inherit|initial|unset)"
+    ],
+    "description": "grid-auto-flow 속성을 빠르고 효율적으로 처리할 때 사용하는 믹스인입니다."
+  },
+  "[CSS 그리드 영역(areas) 믹스인] ▷ grid-areas('header x3' '. main .' 'footer x3')": {
+    "prefix": "grid-areas",
+    "body": [
+      "@include grid-areas(${1:\\$areas: 'header x3' '. #{str-repeat(2, main)\\} .' 'footer x3'})"
+    ],
+    "description": "grid-template-areas 속성을 빠르고 효율적으로 처리할 때 사용하는 믹스인입니다."
+  },
+  "[CSS 그리드 갭(gap) 믹스인] ▷ gap(10) | gap(10 5)": {
+    "prefix": "gap",
+    "body": [
+      "@include gap(${1:\\$value:[number, list]})"
+    ],
+    "description": "gap (또는 row-gap, column-gap) 속성을 빠르고 효율적으로 처리할 때 사용하는 믹스인입니다."
+  },
+  "[CSS 그리드 아이템 믹스인] ▷ grid-item((1 2, '1 / 3')) | grid-item((1, 2), justify-self-center self-center)": {
+    "prefix": "grid-item",
+    "body": [
+      "@include grid-item(${1:\\$area?:[string, list]}, ${2:\\$align?:list → justify-self-* self-*})"
+    ],
+    "description": "Grid Item 요소에 설정 가능한 속성을 빠르고 효율적으로 처리할 때 사용하는 믹스인입니다."
+  },
+  "[CSS 그리드 개별 영역(area) 믹스인] ▷ grid-area(1 2, span 2)": {
+    "prefix": "grid-area",
+    "body": [
+      "@include grid-area(${1:\\$row?:[string, number, list]}, ${2:\\$col?:[number, list]})"
+    ],
+    "description": "grid-area 속성을 빠르고 효율적으로 처리할 때 사용하는 믹스인입니다."
+  },
+  "[CSS 그리드 개별 행(row) 믹스인] ▷ grid-row(s 2) | grid-row(se 2 4)": {
+    "prefix": "grid-row",
+    "body": [
+      "@include grid-row(${1:\\$type:string → start|s|end|e|start-end|se}, ${2:\\$value:[number, list]})"
+    ],
+    "description": "grid-row 속성을 빠르고 효율적으로 처리할 때 사용하는 믹스인입니다."
+  },
+  "[CSS 그리드 개별 행 시작(row start) 믹스인] ▷ row-start(auto) | row-start(3)": {
+    "prefix": "row-start",
+    "body": [
+      "@include row-start(${1:\\$value:[number, string] → auto|number})"
+    ],
+    "description": "grid-row-start 속성을 빠르고 효율적으로 처리할 때 사용하는 믹스인입니다."
+  },
+  "[CSS 그리드 개별 행 끝(row end) 믹스인] ▷ row-end(auto) | row-end(3)": {
+    "prefix": "row-end",
+    "body": [
+      "@include row-end(${1:\\$value:[number, string] → auto|number})"
+    ],
+    "description": "grid-row-end 속성을 빠르고 효율적으로 처리할 때 사용하는 믹스인입니다."
+  },
+  "[CSS 그리드 개별 행 스팬(row span) 믹스인] ▷ row-span(full) | row-span(2)": {
+    "prefix": "row-span",
+    "body": [
+      "@include row-span(${1:\\$value:[number, string] → full|number})"
+    ],
+    "description": "grid-row 속성을 빠르고 효율적으로 처리할 때 사용하는 믹스인입니다."
+  },
+  "[CSS 그리드 개별 열(column) 믹스인] ▷ grid-col(s 2) | grid-col(se 2 4)": {
+    "prefix": "grid-col",
+    "body": [
+      "@include grid-col(${1:\\$type:string → start|s|end|e|start-end|se}, ${2:\\$value:[number, list]})"
+    ],
+    "description": "grid-column 속성을 빠르고 효율적으로 처리할 때 사용하는 믹스인입니다."
+  },
+  "[CSS 그리드 개별 열 시작(column start) 믹스인] ▷ col-start(auto) | col-start(3)": {
+    "prefix": "col-start",
+    "body": [
+      "@include col-start(${1:\\$value:[number, string] → auto|number})"
+    ],
+    "description": "grid-col-start 속성을 빠르고 효율적으로 처리할 때 사용하는 믹스인입니다."
+  },
+  "[CSS 그리드 개별 열 끝(column end) 믹스인] ▷ col-end(auto) | col-end(3)": {
+    "prefix": "col-end",
+    "body": [
+      "@include col-end(${1:\\$value:[number, string] → auto|number})"
+    ],
+    "description": "grid-col-end 속성을 빠르고 효율적으로 처리할 때 사용하는 믹스인입니다."
+  },
+  "[CSS 그리드 개별 열 스팬(column span) 믹스인] ▷ col-span(full) | col-span(2)": {
+    "prefix": "col-span",
+    "body": [
+      "@include col-span(${1:\\$value:[number, string] → full|number})"
+    ],
+    "description": "grid-column 속성을 빠르고 효율적으로 처리할 때 사용하는 믹스인입니다."
+  },
+  
+  // 박스 정렬 -------------------------------------------------------------------------------------------------------
+
+  "[박스 정렬 믹스인] ▷ box-alignment(items, center center)": {
+    "prefix": "box-alignment",
+    "body": [
+      "@include box-alignment(${1:\\$type:string → content|items|self}, ${2:\\$justify:string}, ${3:\\$align:string})"
+    ],
+    "description": "CSS 박스 정렬(Box Alignment)을 빠르고 효율적으로 처리할 때 사용하는 믹스인입니다."
+  },
+  "[박스 정렬 단축 믹스인] ▷ place(self, start center)": {
+    "prefix": "place",
+    "body": [
+      "@include place(${1:\\$type:string → content|items|self}, ${2:\\$justify:string}, ${3:\\$align:string})"
+    ],
+    "description": "place() 믹스인은 box-alignment() 믹스인을 래핑하는 단축 믹스인입니다."
+  },
+  "[content 박스 정렬 단축 믹스인] ▷ content(start, start)": {
+    "prefix": "content",
+    "body": [
+      "@include content(${1:\\$justify?:string}, ${2:\\$align?:string})"
+    ],
+    "description": "content() 믹스인은 box-alignment() 믹스인을 래핑하는 단축 믹스인입니다."
+  },
+  "[items 박스 정렬 단축 믹스인] ▷ items(center, end)": {
+    "prefix": "items",
+    "body": [
+      "@include items(${1:\\$justify?:string}, ${2:\\$align?:string})"
+    ],
+    "description": "items() 믹스인은 box-alignment() 믹스인을 래핑하는 단축 믹스인입니다."
+  },
+  "[self 박스 정렬 단축 믹스인] ▷ self(space-between, stretch)": {
+    "prefix": "self",
+    "body": [
+      "@include self(${1:\\$justify?:string}, ${2:\\$align?:string})"
+    ],
+    "description": "self() 믹스인은 box-alignment() 믹스인을 래핑하는 단축 믹스인입니다."
+  },
+  "[justify-content 속성 믹스인] ▷ justify-content(between) | justify-content(start, flex)": {
+    "prefix": "justify-content",
+    "body": [
+      "@include justify-content(${1:\\$value:string → normal|start|center|end|between|around|evenly|stretch|left|right|safe|unsafe|inherit|initial|unset}, ${2:\\$mode?:string → grid|flex})"
+    ],
+    "description": "justify-content 속성을 빠르고 효율적으로 처리할 때 사용하는 믹스인입니다."
+  },
+  "[align-content 속성 믹스인] ▷ align-content(evenly) | align-content(start, flex)": {
+    "prefix": "align-content",
+    "body": [
+      "@include align-content(${1:\\$value:string → normal|start|center|end|between|around|evenly|stretch|left|right|baseline|first-baseline|last-baseline|safe|unsafe|inherit|initial|unset}, ${2:\\$mode?:string → grid|flex})"
+    ],
+    "description": "align-content 속성을 빠르고 효율적으로 처리할 때 사용하는 믹스인입니다."
+  },
+  "[justify-items 속성 믹스인] ▷ justify-items(stretch) | justify-items(first-baseline)": {
+    "prefix": "justify-items",
+    "body": [
+      "@include justify-items(${1:\\$value:string → auto|normal|stretch|start|center|end|left|right|baseline|first-baseline|last-baseline|safe|unsafe|inherit|initial|unset})"
+    ],
+    "description": "justify-items 속성을 빠르고 효율적으로 처리할 때 사용하는 믹스인입니다."
+  },
+  "[align-items 속성 믹스인] ▷ align-items(baseline) | align-items(end, flex)": {
+    "prefix": "align-items",
+    "body": [
+      "@include align-items(${1:\\$value:string → normal|start|center|end|stretch|baseline|first-baseline|last-baseline|safe|unsafe|inherit|initial|unset}, ${2:\\$mode?:string → grid|flex})"
+    ],
+    "description": "align-items 속성을 빠르고 효율적으로 처리할 때 사용하는 믹스인입니다."
+  },
+  "[justify-self 속성 믹스인] ▷ justify-self(left) | justify-self(safe)": {
+    "prefix": "justify-self",
+    "body": [
+      "@include justify-self(${1:\\$value:string → auto|normal|stretch|start|center|end|left|right|baseline|first-baseline|last-baseline|safe|unsafe|inherit|initial|unset, \\$mode?:string → grid|flex})"
+    ],
+    "description": "justify-self 속성을 빠르고 효율적으로 처리할 때 사용하는 믹스인입니다."
+  },
+  "[align-self 속성 믹스인] ▷ align-self(auto) | align-self(initial)": {
+    "prefix": "align-self",
+    "body": [
+      "@include align-self(${1:\\$value:string → auto|normal|start|center|end|stretch|baseline|first-baseline|last-baseline|safe|unsafe|inherit|initial|unset}, ${2:\\$mode?:string → grid|flex})"
+    ],
+    "description": "align-self 속성을 빠르고 효율적으로 처리할 때 사용하는 믹스인입니다."
+  },
+
+  // 반응형 웹 -------------------------------------------------------------------------------------------------------
+
+  "[미디어쿼리 믹스인] ▷ media('>md') | media('>=md', '<xl') | media('landscape', '2x')": {
+    "prefix": "media",
+    "body": [
+      "@include media(${1:\\$queries... → (sm|md|lg|xl|2xl|3xl)|(landscape|portrait|2x|3x|dark-mode|no-motion)}) {",
+      "  $0",
+      "}"
+    ],
+    "description": "반응형 웹 디자인에 사용되는 미디어 쿼리를 손쉽게 사용하고자 할 때 유용합니다. (include-media 라이브러리 활용)"
+  },
+  "[반응형 이미지 믹스인] rwd-img() | rwd-img(true) | rwd-img(true, height)": {
+    "prefix": "rwd-img",
+    "body": [
+      "@include rwd-img(${1:\\$limit-origin-size?:bool}, ${2:\\$ratio-prop?:string → width|height})"
+    ],
+    "description": "<img /> 요소를 포함하는 컨테이너 크기에 반응하도록 할 때 사용합니다."
+  },
+  "[반응형 비디오 믹스인] rwd-video() | rwd-video(true) | rwd-video(true, height)": {
+    "prefix": "rwd-video",
+    "body": [
+      "@include rwd-video(${1:\\$limit-origin-size?:bool}, ${2:\\$ratio-prop?:string → width|height})"
+    ],
+    "description": "<video> 요소를 포함하는 컨테이너 크기에 반응하도록 할 때 사용합니다."
+  },
+  "[반응형 아이프레임 래퍼 믹스인] rwd-iframe-wrapper() | rwd-iframe-wrapper(21 9)": {
+    "prefix": "rwd-iframe-wrapper",
+    "body": [
+      "@include rwd-iframe-wrapper(${1:\\$ratio:list → 4 3 | 16 9 | 21 9 | ...})"
+    ],
+    "description": "<iframe> 요소를 포함하는 컨테이너 크기에 반응하도록 할 때 사용합니다. (예: Youtube 비디오)"
+  },
+
+  // 이니셜라이즈 -----------------------------------------------------------------------------------------------------
+  
+  "[커스텀 스타일 초기화 믹스인] ▷ initialze() | initialize(true)": {
+    "prefix": "initialze",
+    "body": [
+      "@include initialze(${1:\\$generate-class?:bool})"
+    ],
+    "description": "요소 별 초기화 대신, 미리 설정된(pre setting) 초기화가 필요한 경우 사용합니다."
+  },
+  "[브라우저 기본 스타일 일반화 믹스인] ▷ normalize()": {
+    "prefix": "normalize",
+    "body": [
+      "@include normalize"
+    ],
+    "description": "브라우저 기본 스타일 일반화를 위한 normalize.css(v8.0.1)를 활용하고자 할 때 사용합니다."
+  },
+  "[박스 모델 초기화 믹스인] ▷ reset-box()": {
+    "prefix": "reset-box",
+    "body": [
+      "@include reset-box"
+    ],
+    "description": "요소의 박스 모델을 초기화 설정하는 믹스인입니다."
+  },
+  "[박스 사이징 기준(상속 됨) 설정 믹스인] ▷ reset-box-sizing() | reset-box-sizing(content-box)": {
+    "prefix": "reset-box-sizing",
+    "body": [
+      "@include reset-box-sizing(${1:\\$value:string → border-box|content-box})"
+    ],
+    "description": "요소의 박스 크기 기준을 초기화 설정하는 믹스인입니다. (모든 자손 요소, 가상 요소 속성 상속 됨)"
+  },
+  "[이미지 초기화 믹스인] ▷ reset-img()": {
+    "prefix": "reset-img",
+    "body": [
+      "@include reset-img"
+    ],
+    "description": "<img /> 요소를 초기화 설정하는 믹스인입니다."
+  },
+  "[하이퍼링크(앵커) 초기화 믹스인] ▷ reset-link()": {
+    "prefix": "reset-link",
+    "body": [
+      "@include reset-link"
+    ],
+    "description": "<a> 요소를 초기화 설정하는 믹스인입니다."
+  },
+  "[리스트(ul,ol) 초기화 믹스인] ▷ reset-list()": {
+    "prefix": "reset-list",
+    "body": [
+      "@include reset-list"
+    ],
+    "description": "<ul>, <ol> 요소를 초기화 설정하는 믹스인입니다."
+  },
+  "[설명 리스트(dl) 초기화 믹스인] ▷ reset-dl()": {
+    "prefix": "reset-dl",
+    "body": [
+      "@include reset-dl"
+    ],
+    "description": "<dl> 요소를 초기화 설정하는 믹스인입니다."
+  },
+  "[축약(abbr) 초기화 믹스인] ▷ reset-abbr()": {
+    "prefix": "reset-abbr",
+    "body": [
+      "@include reset-abbr"
+    ],
+    "description": "<abbr> 요소를 초기화 설정하는 믹스인입니다."
+  },
+  "[버튼(button) 초기화 믹스인] ▷ reset-button()": {
+    "prefix": "reset-button",
+    "body": [
+      "@include reset-button"
+    ],
+    "description": "<button> 요소를 초기화 설정하는 믹스인입니다."
+  },
+
+  // 인터페이스 -------------------------------------------------------------------------------------------------------
+
+  "[외관(appearance) 속성 믹스인] ▷ appearance() | appearance(button)": {
+    "prefix": "appearance",
+    "body": [
+      "@include appearance(${1:$value?:string → none|button|push-button|square-button|textarea|checkbox|radio|listbox|textfield|searchfield|menulist|menulist-button|slider-horizontal})"
+    ],
+    "description": "요소의 외관(appearance)을 설정하는 믹스인입니다."
+  },
+  "[선택영역(::selection) 믹스인] ▷ selection() { @content; } | selection('img,button') { @content; }": {
+    "prefix": "selection",
+    "body": [
+      "@include selection(${1:\\$selector?:string → 'img,button'}) {",
+      "  $0",
+      "}"
+    ],
+    "description": "선택 영역(::selection) 스타일을 설정하는 믹스인입니다."
+  },
+  "[스크롤바(scrollbar) 믹스인] ▷ scrollbar() | scrollbar(10, #f00, 6, #000)": {
+    "prefix": "scrollbar",
+    "body": [
+      "@include scrollbar(${1:\\$size?:number}, ${2:\\$thumb-color?:color}, ${3:\\$thumb-radius?:number}, ${4:\\$bar-color?:color})"
+    ],
+    "description": "스크롤바(scrollbar) 모양을 꾸미고자 할 때 사용합니다."
+  },
+
+  // 접근성 ----------------------------------------------------------------------------------------------------------
+  
+  "[접근성 감춤 처리 믹스인] ▷ a11y-hidden() | a11y-hidden(true) | a11y-hidden(true, '-focusable')": {
+    "prefix": "a11y-hidden",
+    "body": [
+      "@include a11y-hidden(${1:\\$focus-visible?:bool}, ${2:\\$focus-state-class?:string})"
+    ],
+    "description": "요소를 화면에서 감추되, 스크린 리더에서 읽힐 수 있도록 하는 믹스인입니다."
+  },
+  "[포커스 비저블 믹스인] → focus-visible() | focus-visible(#ff0) | focus-visible(#00f, 5)": {
+    "prefix": "focus-visible",
+    "body": [
+      "@include focus-visible(${1:\\$color?:color}, ${2:\\$thickness?:number})"
+    ],
+    "description": ":focus-visible 가상 클래스를 사용해 키보드 포커스와 마우스 포커스 상태를 다르게 처리할 때 사용합니다."
+  },
+  
+  // 상속 -----------------------------------------------------------------------------------------------------------
+  
+  "[박스 크기(Box Sizing) 기준 상속 믹스인] ▷ inherit-box-sizing('.demo') | inherit-box-sizing('.run', content-box)": {
+    "prefix": "inherit-box-sizing",
+    "body": [
+      "@include inherit-box-sizing(${1:\\$selector:string}, ${2:\\$value?:string → border-box|content-box})"
+    ],
+    "description": "요소의 박스 크기 기준을 설정하는 믹스인으로 요소가 포함하는 모든 하위 요소들까지 상속 받도록 설정합니다."
+  },
+  "[가상 요소 상속 믹스인] ▷ inherit-pseudo-elements(font-size)": {
+    "prefix": "inherit-pseudo-elements",
+    "body": [
+      "@include inherit-pseudo-elements(${1:\\$prop:string})"
+    ],
+    "description": "요소의 가상 요소들에 설정된 속성을 상속 받도록 설정할 때 사용합니다."
+  },
+  
+  // 폼 -------------------------------------------------------------------------------------------------------------
+  
+}

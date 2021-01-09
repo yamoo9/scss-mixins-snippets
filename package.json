@@ -1,0 +1,50 @@
+{
+  "name": "euid-scss-mixins-snippets",
+  "displayName": "@euid/scss-mixins-snippets",
+  "description": "@euid/scss-mixins 라이브러리 스니펫",
+  "version": "0.0.1",
+  "publisher": "yamoo9",
+  "icon": "assets/icon.png",
+  "engines": {
+    "vscode": "^1.52.0"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yamoo9/scss-mixins-snippets"
+  },
+  "extensionKind": [
+    "web",
+    "workspace",
+    "ui"
+  ],
+  "galleryBanner": {
+    "color": "#a32329",
+    "theme": "dark"
+  },
+  "categories": [
+    "Snippets"
+  ],
+  "contributes": {
+    "snippets": [
+      {
+        "language": "scss",
+        "path": "./snippets/euid-scss.code-snippets"
+      },
+      {
+        "language": "sass",
+        "path": "./snippets/euid-sass.code-snippets"
+      }
+    ]
+  },
+  "keywords": [
+    "@euid",
+    "scss",
+    "sass",
+    "mixins",
+    "scss-mixins",
+    "Snippets",
+    "Snippet",
+    "yamoo9"
+  ]
+}
