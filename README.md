@@ -1,4 +1,4 @@
-<img src="./assets/icon.png" alt="" width="60" />
+<img src="https://raw.githubusercontent.com/yamoo9/scss-mixins-snippets/master/assets/icon.png" alt="" width="60" />
 
 # @euid/scss-mixins 스니펫(Snippets)
 
@@ -13,7 +13,7 @@
 ![Maintenance](https://img.shields.io/maintenance/yes/2020?style=for-the-badge&logo=github)
 [![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=for-the-badge&logo=github)](https://github.com/Eventyret/vscode-bcdn/issues) -->
 
-<img src="./assets/demonstration.gif" width="100%" alt="스니펫 실행 화면" />
+<img src="https://raw.githubusercontent.com/yamoo9/scss-mixins-snippets/master/assets/demonstration.gif" width="100%" alt="스니펫 실행 화면" />
 
 <br/>
 
