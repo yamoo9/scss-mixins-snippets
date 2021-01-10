@@ -4,35 +4,105 @@
   // Sass 기본
   // ———————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-  "@import": {
+  "[모듈 가져오기] ▷ @import 'module'": {
     "prefix": "import",
     "body": [
-      "@import \"${1:모듈}\""
+      "@import \"${1:module}\""
     ],
-    "description": "CSS 임포트"
+    "description": "스타일 모듈을 가져옵니다."
   },
-  "@include": {
+  "[믹스인 불러오기] ▷ @include module()": {
     "prefix": "include",
     "body": [
-      "+${1:믹스인}($0)"
+      "@include ${1:믹스인 이름}($0)"
     ],
-    "description": "SCSS 믹스인 인클루드"
+    "description": "정의된 SCSS 믹스인을 불러와 코드를 출력합니다."
   },
-  "@include-content": {
+  "[@content 믹스인 불러오기] ▷ @include module()": {
     "prefix": "include-content",
     "body": [
-      "+${1:믹스인}($2)",
+      "@include ${1:믹스인 이름}($2)",
       "  $0"
     ],
-    "description": "SCSS 믹스인 인클루드 & 콘텐츠"
+    "description": "정의된 SCSS 믹스인을 불러와 포함하는 콘텐츠를 전달해 코드를 출력합니다."
   },
-  "@mixin": {
+  "[믹스인 만들기] ▷ @mixin module": {
     "prefix": "mixin",
     "body": [
-      "=${1:믹스인}($2)",
+      "@mixin ${1:믹스인 이름}($2)",
       "  $0"
     ],
-    "description": "SCSS 믹스인"
+    "description": "새로운 SCSS 믹스인을 만듭니다."
+  },
+  "[모듈 가져오기] ▷ @use 'module'": {
+    "prefix": "use",
+    "body": [
+      "@use \"${1:module}\""
+    ],
+    "description": "네임스페이스.모듈 형식으로 모듈 내 정의된 변수, 믹스인, 함수 등을 사용합니다."
+  },
+  "[모듈 가져오기 (네임스페이스 설정)] ▷ @use 'module' as mod | @use 'module' as *": {
+    "prefix": "use-namespace",
+    "body": [
+      "@use \"${1:module}\" as ${2:namespace};"
+    ],
+    "description": "네임스페이스.모듈 형식으로 모듈 내 정의된 변수, 믹스인, 함수 등을 사용합니다."
+  },
+  "[모듈 가져오기 (변수 설정)] ▷ @use 'module' with ()": {
+    "prefix": "use-with",
+    "body": [
+      "@use \"${1:module}\" with ($${2:variable}: ${3:value}$0)"
+    ],
+    "description": "네임스페이스.모듈 형식으로 모듈 내 정의된 변수, 믹스인, 함수 등을 사용합니다."
+  },
+  "[모듈을 엔트리 파일에 전달하기] ▷ @forward 'module'": {
+    "prefix": "forward",
+    "body": [
+      "@forward \"${1:module}\""
+    ],
+    "description": "스타일 모듈을 엔트리 파일에 불러와 사용하는 것을 허용합니다."
+  },
+  "[디버깅] ▷ @debug": {
+    "prefix": "debug",
+    "body": [
+      "@debug $0"
+    ],
+    "description": "콘솔에 디버깅 결과를 출력합니다."
+  },
+  "[워닝] ▷ @warn": {
+    "prefix": "warn",
+    "body": [
+      "@warn $0"
+    ],
+    "description": "콘솔에 경고 메시지를 출력합니다."
+  },
+  "[에러] ▷ @error": {
+    "prefix": "error",
+    "body": [
+      "@error $0"
+    ],
+    "description": "콘솔에 오류 메시지를 출력합니다."
+  },
+  "[기본 값] ▷ !default": {
+    "prefix": "default",
+    "body": [
+      "!default"
+    ],
+    "description": "기본 값 설정합니다."
+  },
+  "[글로벌 값] ▷ !global": {
+    "prefix": "global",
+    "body": [
+      "!global"
+    ],
+    "description": "글로벌 값 설정합니다."
+  },
+  "[임폴턴트 값] ▷ !important": {
+    "prefix": "important",
+    "body": [
+      "!important"
+    ],
+    "description": "임폴턴트 값 설정합니다."
   },
 
   // ————————————————————————————————————————————————————————————————————————————————————————————————————————————
