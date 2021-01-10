@@ -8,7 +8,7 @@
 ![Visual Studio Marketplace Rating](https://img.shields.io/visual-studio-marketplace/r/yamoo9.euid-scss-mixins-snippets?style=flat-square&logo=visual-studio-code&labelColor=007ACC&color=000)
 ![Visual Studio Marketplace Downloads](https://img.shields.io/visual-studio-marketplace/d/yamoo9.euid-scss-mixins-snippets?style=flat-square&logo=visual-studio-code&labelColor=007ACC&color=000)
 ![Visual Studio Marketplace Installs](https://img.shields.io/visual-studio-marketplace/i/yamoo9.euid-scss-mixins-snippets?style=flat-square&logo=visual-studio-code&labelColor=007ACC&color=000)
-![License](https://img.shields.io/github/license/yamoo9/scss-mixins-snippets?style=flat-square&logo=github)
+![License](https://img.shields.io/github/license/yamoo9/scss-mixins-snippets?style=flat-square&logo=github&labelColor=007ACC&color=000)
 
 <!-- ![Maintenance](https://img.shields.io/maintenance/yes/2021?style=flat-square&logo=github) -->
 <!-- [![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat-square&logo=github)](https://github.com/yamoo9/scss-mixins-snippets/issues) -->
@@ -21,7 +21,7 @@
 
 스니펫 키워드 일부를 입력하고 엔터(Enter|Return) 키를 누르면 등록된 스니펫 코드가 출력됩니다.
 
-### Sass 기본 스니펫
+### Sass 스니펫
 
 | 스니펫                         | 용도
 | ---------------------------- | ---------------------------------------------------
@@ -31,7 +31,14 @@
 | [mixin](https://sass-lang.com/documentation/at-rules/import) | 믹스인 만들기
 | [use](https://sass-lang.com/documentation/at-rules/use) | 모듈 가져오기 (→ 네임스페이스 생성)
 | [use-namespace](https://sass-lang.com/documentation/at-rules/use#choosing-a-namespace) | 모듈 가져오기 (→ 네임스페이스 설정)
+| [use-with](https://sass-lang.com/documentation/at-rules/use#configuration) | 모듈 가져오기 (→ 기본 값 재정의)
 | [forward](https://sass-lang.com/documentation/at-rules/forward) | 모듈을 엔트리 파일에 전달하기
+| [debug](https://sass-lang.com/documentation/at-rules/debug) | 디버깅(debuging) 결과 출력
+| [warn](https://sass-lang.com/documentation/at-rules/warn) | 경고(warning) 결과 출력
+| [error](https://sass-lang.com/documentation/at-rules/error) | 오류(error) 결과 출력
+| [default](https://sass-lang.com/documentation/variables#default-values) | 기본 값 플래그(flag) 출력
+| [global](https://sass-lang.com/documentation/variables#shadowing) | 글로벌 값 플래그(flag) 출력
+| [important](https://sass-lang.com/documentation/syntax/structure#other-expressions) | CSS 임폴턴트 값 플래그(flag) 출력
 
 <br/>
 
