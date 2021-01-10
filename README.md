@@ -4,12 +4,12 @@
 
 [이듬(E.UID)](https://euid.dev)의 블렌디드 러닝 학습용 [@euid/scss-mixins](https://www.npmjs.com/package/@euid/scss-mixins) 라이브러리 활용을 위한 스니펫.
 
-![Visual Studio Marketplace Version](https://img.shields.io/visual-studio-marketplace/v/yamoo9.euid-scss-mixins-snippets?style=for-the-badge&logo=visual-studio-code&labelColor=007ACC&color=000)
-![Visual Studio Marketplace Rating](https://img.shields.io/visual-studio-marketplace/r/yamoo9.euid-scss-mixins-snippets?style=for-the-badge&logo=visual-studio-code&labelColor=007ACC&color=000)
-![Visual Studio Marketplace Downloads](https://img.shields.io/visual-studio-marketplace/d/yamoo9.euid-scss-mixins-snippets?style=for-the-badge&logo=visual-studio-code&labelColor=007ACC&color=000)
-![Visual Studio Marketplace Installs](https://img.shields.io/visual-studio-marketplace/i/yamoo9.euid-scss-mixins-snippets?style=for-the-badge&logo=visual-studio-code&labelColor=007ACC&color=000)
+![Visual Studio Marketplace Version](https://img.shields.io/visual-studio-marketplace/v/yamoo9.euid-scss-mixins-snippets?style=flat-square&logo=visual-studio-code&labelColor=007ACC&color=000)
+![Visual Studio Marketplace Rating](https://img.shields.io/visual-studio-marketplace/r/yamoo9.euid-scss-mixins-snippets?style=flat-square&logo=visual-studio-code&labelColor=007ACC&color=000)
+![Visual Studio Marketplace Downloads](https://img.shields.io/visual-studio-marketplace/d/yamoo9.euid-scss-mixins-snippets?style=flat-square&logo=visual-studio-code&labelColor=007ACC&color=000)
+![Visual Studio Marketplace Installs](https://img.shields.io/visual-studio-marketplace/i/yamoo9.euid-scss-mixins-snippets?style=flat-square&logo=visual-studio-code&labelColor=007ACC&color=000)
+![License](https://img.shields.io/github/license/yamoo9/scss-mixins-snippets?style=flat-square&logo=github)
 
-<!-- ![License](https://img.shields.io/github/license/yamoo9/scss-mixins-snippets?style=flat-square&logo=github) -->
 <!-- ![Maintenance](https://img.shields.io/maintenance/yes/2021?style=flat-square&logo=github) -->
 <!-- [![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat-square&logo=github)](https://github.com/yamoo9/scss-mixins-snippets/issues) -->
 
