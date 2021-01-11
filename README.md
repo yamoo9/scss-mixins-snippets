@@ -108,9 +108,9 @@
 
 | 스니펫                         | 용도
 | ---------------------------- | ---------------------------------------------------
-| [ease](https://yamoo9.gitbook.io/scss-mixins/easing/ease) | 이징 키워드로 등록된 이징 함수 반환
-| [ease-add](https://yamoo9.gitbook.io/scss-mixins/easing/ease-add) | 1개의 커스텀 이징 함수를 추가 등록
-| [ease-merge](https://yamoo9.gitbook.io/scss-mixins/easing/ease-merge) | 1개 이상 다수의 커스텀 이징 함수를 추가 등록
+| [ease](https://yamoo9.gitbook.io/scss-mixins/utilities/easing/ease) | 이징 키워드로 등록된 이징 함수 반환
+| [ease-add](https://yamoo9.gitbook.io/scss-mixins/utilities/easing/ease-add) | 1개의 커스텀 이징 함수를 추가 등록
+| [ease-merge](https://yamoo9.gitbook.io/scss-mixins/utilities/easing/ease-merge) | 1개 이상 다수의 커스텀 이징 함수를 추가 등록
 
 <br/>
 
