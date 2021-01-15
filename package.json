@@ -2,7 +2,7 @@
   "name": "euid-scss-mixins-snippets",
   "displayName": "@euid/scss-mixins-snippets",
   "description": "@euid/scss-mixins 라이브러리 스니펫",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "publisher": "yamoo9",
   "icon": "assets/icon.png",
   "engines": {
