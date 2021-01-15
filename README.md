@@ -269,13 +269,29 @@
 
 ## 릴리즈 노트
 
+### 0.2.0 (2021-01-15)
+
+[개선]
+- 추가된 Sass 스니펫 정리 → README.md
+- 잘못된 문서 링크 수정 → README.md
+
+[추가] 
+- 뱃지 모양 변경 및 라이선스 뱃지
+- MIT 라이선스
+
+
 ### 0.1.1 (2021-01-10)
 
-- [추가] Sass 기본 스니펫 (`@use`, `@forward`, `@debug`, `!default` 등)
-- [개선] README.md → 각 스니펫 별 문서 링크 설정
+[개선] 
+- README.md → 각 스니펫 별 문서 링크 설정
+
+[추가] 
+- Sass 기본 스니펫 (`@use`, `@forward`, `@debug`, `!default` 등)
+
 ### 0.1.0 (2021-01-09)
 
-[@euid/scss-mixins](https://www.npmjs.com/package/@euid/scss-mixins) 라이브러리 스니펫 출시
+[추가] 
+- [@euid/scss-mixins](https://www.npmjs.com/package/@euid/scss-mixins) 라이브러리 스니펫 출시
 
 ## 알려진 문제
 
